@@ -1,7 +1,26 @@
-<!DOCTYPE html>
+<!DO,CTYPE html>
 	
 	<body>
-		<p>This is Craig's test website, please stand by!</p>
+		<p id="poop">This is Craig's test website, please stand by!</p>
+		
+		<input id="clickMe" type="button" value="clickme" onclick="doFunction();" />
+		
 	</body>
-	
+		
 </html>
+
+<script>
+
+	function doFunction(){
+		document.getElementById("poop").innerHTML = "Button clicked!";
+		
+		setTimeout(function test(){
+
+			document.getElementById("poop").innerHTML = "U smel";
+		
+		},2000);
+	}
+
+	
+	
+</script>
