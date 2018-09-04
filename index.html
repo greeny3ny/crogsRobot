@@ -10,7 +10,7 @@
 		<p>A.L.F is still being born, stand by!</p>
 		<p>Their name might even change, we can't decide on a name</p>
 		
-		<p> Latest update : HORN ADDED </p>
+		<p> Latest update : Status Indicator </p>
 		
 		<table style="width:100%">
 			<tr>
@@ -51,6 +51,10 @@
 					<iframe width="560" height="315" src="https://www.youtube.com/embed/PYgh2mudf6I" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 				</td>
 			</tr>
+			<tr>
+				<td></td>
+				<td><p id="status"> Current status : </p></td>
+			</tr>
 		</table>
 		
 	</body>
@@ -70,7 +74,12 @@
 	firebase.initializeApp(config);
 
 	const DB_REF = new Firebase("https://crogobot.firebaseio.com");
+	
+	document.getElementById("for").innerHTML = "Moving forward";
 
+
+	readFirebase();
+	
 	function moveForwards(){
 		document.getElementById("for").innerHTML = "Moving forward";
 		
@@ -116,6 +125,15 @@
 			document.getElementById("horn").innerHTML = "---------------------------";
 			DB_REF.update({cont: "stop"});
 		},2000);
+	}
+	
+	function readFirebase(){
+		console.log("reading firebase...");
+		DB_REF.child("cont").on("value", function(snapshot){
+			console.log(snapshot.val());
+			var st = snapshot.val(); 
+			document.getElementById("status").innerHTML = "Current status : " + st;
+		});
 	}
 	
 	function doFunction(){}
