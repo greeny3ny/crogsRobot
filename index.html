@@ -34,15 +34,18 @@
 							<td><input id="clickMe" type="button" value="Click" onclick="leftTurn();" /></td>
 							<td><p id="letu">---------------------------</p></td>
 						</tr>
+						<tr>
+							<td>Honk Horn</td>
+							<td><input id="clickMe" type="button" value="Click" onclick="leftTurn();" /></td>
+							<td><p id="horn">---------------------------</p></td>
+						</tr>
 					</table>
 				</td>
 				<td>
 					<!-- 
-					
-					rPleicjySdI - Stand by
-					I9z0LvoFqHg - Happy Altspace
-					
-					-->
+						rPleicjySdI - Stand by
+						I9z0LvoFqHg - Happy Altspace
+					--->
 					<iframe width="560" height="315" src="https://www.youtube.com/embed/rPleicjySdI" frameborder="1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 				</td>
 			</tr>
@@ -87,7 +90,7 @@
 	}
 	
 	function rightTurn(){
-		document.getElementById("ritu").innerHTML = "Turning Right";
+		document.getElementById("ritu").innerHTML = "Turning right";
 		DB_REF.update({cont: "right"});
 		setTimeout(function test(){
 			document.getElementById("ritu").innerHTML = "---------------------------";
@@ -96,10 +99,19 @@
 	}
 	
 	function leftTurn(){
-		document.getElementById("letu").innerHTML = "Turning Left";
+		document.getElementById("letu").innerHTML = "Turning left";
 		DB_REF.update({cont: "left"});
 		setTimeout(function test(){
 			document.getElementById("letu").innerHTML = "---------------------------";
+			DB_REF.update({cont: "stop"});
+		},2000);
+	}
+	
+	function honkHorn(){
+		document.getElementById("horn").innerHTML = "Honking horn";
+		DB_REF.update({cont: "horn"});
+		setTimeout(function test(){
+			document.getElementById("horn").innerHTML = "---------------------------";
 			DB_REF.update({cont: "stop"});
 		},2000);
 	}
