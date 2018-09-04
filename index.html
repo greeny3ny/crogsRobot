@@ -1,18 +1,36 @@
 <!DO,CTYPE html>
 	
 	<body>
-		<p id="test11">Welcome to A.L.F controls</p>
-		<p>Establishing a connection to A.L.F...</p>
+		<p id="test11">Welcome to A.L.F control</p>
+		<p>A.L.F is still being born, stand by!</p>
+		<p>Their name might even change, we can't decide on a name</p>
 		
-		<input id="clickMe" type="button" value="clickme" onclick="doFunction();" />
-		
-		<aside>
-			
-		</aside>
-		
-		<table style="width:500%">
+		<table style="width:100%">
 			<tr>
-				<td>Test1</td>
+				<td>
+					<table style="width:50%" border=0>
+						<tr>
+							<td>Forwards</td>
+							<td><input id="clickMe" type="button" value="Click" onclick="moveForwards();" /></td>
+							<td><p id="for">---------------------------</p></td>
+						</tr>
+						<tr>
+							<td>Backwards</td>
+							<td><input id="clickMe" type="button" value="Click" onclick="moveBackwards();" /></td>
+							<td><p id="bac">---------------------------</p></td>
+						</tr>
+						<tr>
+							<td>Right Turn</td>
+							<td><input id="clickMe" type="button" value="Click" onclick="rightTurn();" /></td>
+							<td><p id="ritu">---------------------------</p></td>
+						</tr>
+						<tr>
+							<td>Left Turn</td>
+							<td><input id="clickMe" type="button" value="Click" onclick="leftTurn();" /></td>
+							<td><p id="letu">---------------------------</p></td>
+						</tr>
+					</table>
+				</td>
 				<td>
 					<iframe width="560" height="315" src="https://www.youtube.com/embed/I9z0LvoFqHg" frameborder="1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 				</td>
@@ -25,15 +43,35 @@
 
 <script>
 
-	function doFunction(){
-		document.getElementById("test11").innerHTML = "Button clicked!";
-		
+	function moveForwards(){
+		document.getElementById("for").innerHTML = "Moving forward";
 		setTimeout(function test(){
-
-			document.getElementById("test11").innerHTML = "U smel";
-		
+			document.getElementById("for").innerHTML = "---------------------------";
 		},2000);
 	}
+	
+	function moveBackwards(){
+		document.getElementById("bac").innerHTML = "Moving backwards";
+		setTimeout(function test(){
+			document.getElementById("bac").innerHTML = "---------------------------";
+		},2000);
+	}
+	
+	function rightTurn(){
+		document.getElementById("ritu").innerHTML = "Turning Right";
+		setTimeout(function test(){
+			document.getElementById("ritu").innerHTML = "---------------------------";
+		},2000);
+	}
+	
+	function leftTurn(){
+		document.getElementById("letu").innerHTML = "Turning Left";
+		setTimeout(function test(){
+			document.getElementById("letu").innerHTML = "---------------------------";
+		},2000);
+	}
+	
+	function doFunction(){}
 
 	
 	
