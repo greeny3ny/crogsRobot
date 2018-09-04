@@ -79,17 +79,12 @@
 	firebase.initializeApp(config);
 
 	const DB_REF = new Firebase("https://crogobot.firebaseio.com");
-	
-	document.getElementById("for").innerHTML = "Moving forward";
-
 
 	readFirebase();
 	
 	function moveForwards(){
 		document.getElementById("for").innerHTML = "Moving forward";
-		
 		DB_REF.update({cont: "up"});
-		
 		setTimeout(function test(){
 			document.getElementById("for").innerHTML = "---------------------------";
 			DB_REF.update({cont: "stop"});
