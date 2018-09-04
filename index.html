@@ -147,7 +147,7 @@
 	
 	function readFirebase(){
 		console.log("reading firebase...");
-		DB_REF.child("online").on("value", function(snapshot){
+		DB_REF.child("cont").on("value", function(snapshot){
 			console.log(snapshot.val());
 			var st = snapshot.val(); 
 			document.getElementById("status").innerHTML = "Current status : " + st;
