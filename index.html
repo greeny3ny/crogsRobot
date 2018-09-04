@@ -160,7 +160,7 @@
 		DB_REF.child("online").on("value", function(snapshot){
 			console.log(snapshot.val());
 			var st = snapshot.val(); 
-			document.getElementById("onlineStatus").innerHTML = "IS CROGBOT CURRENTLY ACTIVE? : " + st;
+			document.getElementById("onlineStatus").innerHTML = "IS LILY CURRENTLY ACTIVE? : " + st;
 			if (st == "No"){
 				offline = true;
 				document.getElementById("status").innerHTML = "Current status : Offline";
