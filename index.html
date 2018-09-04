@@ -1,5 +1,10 @@
-<!DO,CTYPE html>
-	
+<!DOCTYPE html>
+
+	<head>
+		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+		<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+	</head>
+
 	<body>
 		<p id="test11">Welcome to A.L.F control</p>
 		<p>A.L.F is still being born, stand by!</p>
@@ -32,7 +37,13 @@
 					</table>
 				</td>
 				<td>
-					<iframe width="560" height="315" src="https://www.youtube.com/embed/I9z0LvoFqHg" frameborder="1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+					<!-- 
+					
+					rPleicjySdI - Stand by
+					I9z0LvoFqHg - Happy Altspace
+					
+					-->
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/rPleicjySdI" frameborder="1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 				</td>
 			</tr>
 		</table>
@@ -43,31 +54,53 @@
 
 <script>
 
+	var config = {
+		apiKey: "AIzaSyA6pk5vRkVWlQRXKOjLJ_khMUMvGnTzlkQ",
+		authDomain: "crogobot.firebaseapp.com",
+		databaseURL: "https://crogobot.firebaseio.com",
+		projectId: "crogobot",
+		storageBucket: "",
+		messagingSenderId: "345603303322"
+	};
+	firebase.initializeApp(config);
+
+	const DB_REF = new Firebase("https://crogobot.firebaseio.com");
+
 	function moveForwards(){
 		document.getElementById("for").innerHTML = "Moving forward";
+		
+		DB_REF.update({cont: "up"});
+		
 		setTimeout(function test(){
 			document.getElementById("for").innerHTML = "---------------------------";
+			DB_REF.update({cont: "stop"});
 		},2000);
 	}
 	
 	function moveBackwards(){
 		document.getElementById("bac").innerHTML = "Moving backwards";
+		DB_REF.update({cont: "down"});
 		setTimeout(function test(){
 			document.getElementById("bac").innerHTML = "---------------------------";
+			DB_REF.update({cont: "stop"});
 		},2000);
 	}
 	
 	function rightTurn(){
 		document.getElementById("ritu").innerHTML = "Turning Right";
+		DB_REF.update({cont: "right"});
 		setTimeout(function test(){
 			document.getElementById("ritu").innerHTML = "---------------------------";
+			DB_REF.update({cont: "stop"});
 		},2000);
 	}
 	
 	function leftTurn(){
 		document.getElementById("letu").innerHTML = "Turning Left";
+		DB_REF.update({cont: "left"});
 		setTimeout(function test(){
 			document.getElementById("letu").innerHTML = "---------------------------";
+			DB_REF.update({cont: "stop"});
 		},2000);
 	}
 	
