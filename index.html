@@ -11,13 +11,14 @@
 	<body>
 		<h1>CrogBot V1</h1>
 	
-		<p id="test11">Welcome to A.L.F control</p>
-		<p>A.L.F is still being born, stand by!</p>
-		<p>Their name might even change, we can't decide on a name</p>
+		<p id="test11">Welcome to CrogBot control.</p>
+		<p>CrogBot currently lacks a body, parts arrive 05/09/2018!</p>
 		
-		<p> Latest update : CSS </p>
+		<p> Latest update : Online Status / Servo controls</p>
 		
-		<table id="#t1"style="width:100%" >
+		<p id="onlineStatus"> IS CROGBOT CURRENTLY ACTIVE? : </p> 
+		
+		<table id="#t1"style="width:150%" >
 			<tr>
 				<td>
 					<table style="width:50%" border="3">
@@ -42,9 +43,14 @@
 							<td><p id="letu">---------------------------</p></td>
 						</tr>
 						<tr>
-							<td>Honk Horn</td>
-							<td><input id="clickMe" type="button" value="Click" onclick="honkHorn();" /></td>
-							<td><p id="horn">---------------------------</p></td>
+							<td>Servo Left</td>
+							<td><input id="clickMe" type="button" value="Click" onclick="leftServo();" /></td>
+							<td><p id="lese">---------------------------</p></td>
+						</tr>
+						<tr>
+							<td>Servo Right</td>
+							<td><input id="clickMe" type="button" value="Click" onclick="rightServo();" /></td>
+							<td><p id="rise">---------------------------</p></td>
 						</tr>
 					</table>
 				</td>
@@ -80,7 +86,10 @@
 
 	const DB_REF = new Firebase("https://crogobot.firebaseio.com");
 
+	var offline = false;
+	
 	readFirebase();
+	checkOnlineStatus();
 	
 	function moveForwards(){
 		document.getElementById("for").innerHTML = "Moving forward";
@@ -118,21 +127,43 @@
 		},2000);
 	}
 	
-	function honkHorn(){
-		document.getElementById("horn").innerHTML = "Honking horn";
-		DB_REF.update({cont: "horn"});
+	//REMOVE THIS FOR CAMERA CONTROLS
+	function leftServo(){
+		document.getElementById("lese").innerHTML = "Servo Left";
+		DB_REF.update({servo: "left"});
 		setTimeout(function test(){
-			document.getElementById("horn").innerHTML = "---------------------------";
-			DB_REF.update({cont: "stop"});
+			document.getElementById("lese").innerHTML = "---------------------------";
+			DB_REF.update({servo: "centre"});
+		},2000);
+	}
+	function rightServo(){
+		document.getElementById("rise").innerHTML = "Servo Right";
+		DB_REF.update({servo: "right"});
+		setTimeout(function test(){
+			document.getElementById("rise").innerHTML = "---------------------------";
+			DB_REF.update({servo: "centre"});
 		},2000);
 	}
 	
 	function readFirebase(){
 		console.log("reading firebase...");
-		DB_REF.child("cont").on("value", function(snapshot){
+		DB_REF.child("online").on("value", function(snapshot){
 			console.log(snapshot.val());
 			var st = snapshot.val(); 
 			document.getElementById("status").innerHTML = "Current status : " + st;
+		});
+	}
+	
+	function checkOnlineStatus(){
+		console.log("reading firebase...");
+		DB_REF.child("online").on("value", function(snapshot){
+			console.log(snapshot.val());
+			var st = snapshot.val(); 
+			document.getElementById("onlineStatus").innerHTML = "IS CROGBOT CURRENTLY ACTIVE? : " + st;
+			if (st == "No"){
+				offline = true;
+				document.getElementById("status").innerHTML = "Current status : Offline";
+			}else{readFirebase();}
 		});
 	}
 	
