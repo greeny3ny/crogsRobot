@@ -48,7 +48,9 @@ def editLight(r):
     else:
         print ("FULL STOP")
 
+#This code will be depricated when I implement the rift stuff!
 def setServo(s):
+    servo.start(7.5)
     if (s == 'left'):
         print('Servo Left')
         servo.ChangeDutyCycle(12.5)
@@ -64,7 +66,6 @@ while True:
 
     servoRotation = firebase.get('/servo', None)
     setServo(servoRotation)
-    
     time.sleep(1)
 
     GPIO.output(forwardPin, GPIO.LOW)
@@ -72,7 +73,9 @@ while True:
     GPIO.output(rightPin, GPIO.LOW)
     GPIO.output(leftPin, GPIO.LOW)
 
+    #need to stop the servo to fix the stuttery servo issue
     servo.ChangeDutyCycle(7.5)
+    
     time.sleep(0.5)
     # You can play with the values.
     # 7.5 is in most cases the middle position
