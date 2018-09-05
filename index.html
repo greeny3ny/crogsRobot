@@ -25,32 +25,32 @@
 					<table style="width:50%" border="3">
 						<tr>
 							<td>Forwards</td>
-							<td><input id="clickMe" type="button" value="Click" onclick="moveForwards();" /></td>
+							<td><input id="forBut" type="button" value="Click" onclick="moveForwards();" /></td>
 							<td><p id="for">---------------------------</p></td>
 						</tr>
 						<tr>
 							<td>Backwards</td>
-							<td><input id="clickMe" type="button" value="Click" onclick="moveBackwards();" /></td>
+							<td><input id="bacBut" type="button" value="Click" onclick="moveBackwards();" /></td>
 							<td><p id="bac">---------------------------</p></td>
 						</tr>
 						<tr>
 							<td>Right Turn</td>
-							<td><input id="clickMe" type="button" value="Click" onclick="rightTurn();" /></td>
+							<td><input id="rigBut" type="button" value="Click" onclick="rightTurn();" /></td>
 							<td><p id="ritu">---------------------------</p></td>
 						</tr>
 						<tr>
 							<td>Left Turn</td>
-							<td><input id="clickMe" type="button" value="Click" onclick="leftTurn();" /></td>
+							<td><input id="lefBut" type="button" value="Click" onclick="leftTurn();" /></td>
 							<td><p id="letu">---------------------------</p></td>
 						</tr>
 						<tr>
 							<td>Servo Left</td>
-							<td><input id="clickMe" type="button" value="Click" onclick="leftServo();" /></td>
+							<td><input id="SLeBut" type="button" value="Click" onclick="leftServo();" /></td>
 							<td><p id="lese">---------------------------</p></td>
 						</tr>
 						<tr>
 							<td>Servo Right</td>
-							<td><input id="clickMe" type="button" value="Click" onclick="rightServo();" /></td>
+							<td><input id="SRiBut" type="button" value="Click" onclick="rightServo();" /></td>
 							<td><p id="rise">---------------------------</p></td>
 						</tr>
 					</table>
@@ -181,7 +181,28 @@
 				readFirebase();
 				getVideo();
 			}
+			enableButtons(st);
 		});
+	}
+	
+	//Arbitrary 'i' chosen here
+	function enableButtons(i){
+		console.log(i);
+		if (i == 'No'){
+			document.getElementById("forBut").disabled = true;
+			document.getElementById("bacBut").disabled = true;
+			document.getElementById("rigBut").disabled = true;
+			document.getElementById("lefBut").disabled = true;
+			document.getElementById("SLeBut").disabled = true;
+			document.getElementById("SRiBut").disabled = true;
+		} else {
+			document.getElementById("forBut").disabled = false;
+			document.getElementById("bacBut").disabled = false;
+			document.getElementById("rigBut").disabled = false;
+			document.getElementById("lefBut").disabled = false;
+			document.getElementById("SLeBut").disabled = false;
+			document.getElementById("SRiBut").disabled = false;
+		}
 	}
 	
 	function doFunction(){}
