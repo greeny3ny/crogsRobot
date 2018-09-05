@@ -59,8 +59,10 @@
 					<!-- 
 						rPleicjySdI - Stand by
 						I9z0LvoFqHg - Happy Altspace
+						
+						LIVESTREAM LINK WILL NEED CHANGED WHEN OFFLINE / RESTARTED
 					--->
-					<iframe width="560" height="315" src="https://www.youtube.com/embed/PYgh2mudf6I" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+					<iframe id="vid" width="560" height="315" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 				</td>
 			</tr>
 			<tr>
@@ -90,6 +92,7 @@
 	var offline = false;
 	
 	readFirebase();
+	//getVideo();
 	checkOnlineStatus();
 	
 	function moveForwards(){
@@ -155,6 +158,15 @@
 		});
 	}
 	
+	function getVideo(){
+		console.log("reading firebase...");
+		DB_REF.child("vidSrc").on("value", function(snapshot){
+			console.log(snapshot.val());
+			var st = snapshot.val(); 
+			document.getElementById("vid").src = "https://www.youtube.com/embed/" + st;
+		});
+	}
+	
 	function checkOnlineStatus(){
 		console.log("reading firebase...");
 		DB_REF.child("online").on("value", function(snapshot){
@@ -164,7 +176,11 @@
 			if (st == "No"){
 				offline = true;
 				document.getElementById("status").innerHTML = "Current status : Offline";
-			}else{readFirebase();}
+				document.getElementById("vid").src = "https://www.youtube.com/embed/rPleicjySdI";
+			}else{
+				readFirebase();
+				getVideo();
+			}
 		});
 	}
 	
