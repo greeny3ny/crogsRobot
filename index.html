@@ -4,72 +4,53 @@
 		<script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
 		<script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
 		
-		<title>LILY V2</title>
+		<title>LILY Control</title>
 		<link href="style.css" rel="stylesheet"/>
 	</head>
 
 	<body>
-		<h1>LILY V2</h1>
+		<h1>LILY V2.2</h1>
 	
 		<p id="test11">Welcome to LILY control.</p>
-		<p>LILY currently lacks a body, parts arrive 05/09/2018!</p>
 		<p>LILY : The Little Intelligent Lollipop Yunicorn</p>
 		
-		<p> Latest update : Online Status / Servo controls</p>
+		<p id="onlineStatus" style="font-weight: bold;"> IS LILY CURRENTLY ACTIVE? : </p> 
 		
-		<p id="onlineStatus"> IS LILY CURRENTLY ACTIVE? : </p> 
 		
-		<table id="#t1"style="width:150%" >
-			<tr>
-				<td>
-					<table style="width:50%" border="3">
+					<table style="width:50%" border="0">
 						<tr>
-							<td>Forwards</td>
-							<td><input id="forBut" type="button" value="Click" onclick="moveForwards();" /></td>
-							<td><p id="for">---------------------------</p></td>
+							<td><input id="forBut" type="button" value="Forwards" onclick="moveForwards();" /></td>
 						</tr>
 						<tr>
-							<td>Backwards</td>
-							<td><input id="bacBut" type="button" value="Click" onclick="moveBackwards();" /></td>
-							<td><p id="bac">---------------------------</p></td>
+							<td><input id="bacBut" type="button" value="Backwards" onclick="moveBackwards();" /></td>	
 						</tr>
 						<tr>
-							<td>Right Turn</td>
-							<td><input id="rigBut" type="button" value="Click" onclick="rightTurn();" /></td>
-							<td><p id="ritu">---------------------------</p></td>
+							<td><input id="rigBut" type="button" value="Right" onclick="rightTurn();" /></td>
 						</tr>
 						<tr>
-							<td>Left Turn</td>
-							<td><input id="lefBut" type="button" value="Click" onclick="leftTurn();" /></td>
-							<td><p id="letu">---------------------------</p></td>
+							<td><input id="lefBut" type="button" value="Left" onclick="leftTurn();" /></td>
 						</tr>
 						<tr>
-							<td>Servo Left</td>
-							<td><input id="SLeBut" type="button" value="Click" onclick="leftServo();" /></td>
-							<td><p id="lese">---------------------------</p></td>
-						</tr>
-						<tr>
-							<td>Servo Right</td>
-							<td><input id="SRiBut" type="button" value="Click" onclick="rightServo();" /></td>
-							<td><p id="rise">---------------------------</p></td>
+							<td><input id="resetDatabase" type="button" value="Reset Database" onclick="resetDatabase();" /></td>
 						</tr>
 					</table>
-				</td>
-				<td>
+				
+				
 					<!-- 
 						rPleicjySdI - Stand by
 						I9z0LvoFqHg - Happy Altspace
 						
 						LIVESTREAM LINK WILL NEED CHANGED WHEN OFFLINE / RESTARTED
+						CHANGE IT ON FIREBASE ! :)
 					--->
-					<iframe id="vid" width="560" height="315" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-				</td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><p id="status"> Current status : </p></td>
-			</tr>
-		</table>
+					
+
+				<iframe id="vid" width="560" height="315" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+				
+				
+			
+		
 		
 	</body>
 		
@@ -90,92 +71,96 @@
 	const DB_REF = new Firebase("https://crogobot.firebaseio.com");
 
 	var offline = false;
-	
+	const DATA_TIMEOUT = 2000;
 	readFirebase();
-	//getVideo();
 	checkOnlineStatus();
+	readListCommands();
 	
 	function moveForwards(){
-		document.getElementById("for").innerHTML = "Moving forward";
-		DB_REF.update({cont: "up"});
+		
+		//DB_REF.update({cont: "up"});
+		databasePush("up");
+		//possible remove this function \/ \/
 		setTimeout(function test(){
-			document.getElementById("for").innerHTML = "---------------------------";
+		
 			DB_REF.update({cont: "stop"});
-		},2000);
+		},DATA_TIMEOUT);
 	}
 	
 	function moveBackwards(){
-		document.getElementById("bac").innerHTML = "Moving backwards";
-		DB_REF.update({cont: "down"});
+
+		databasePush("down");
 		setTimeout(function test(){
-			document.getElementById("bac").innerHTML = "---------------------------";
+
 			DB_REF.update({cont: "stop"});
-		},2000);
+		},DATA_TIMEOUT);
 	}
 	
 	function rightTurn(){
-		document.getElementById("ritu").innerHTML = "Turning right";
-		DB_REF.update({cont: "right"});
+		
+		databasePush("right");
 		setTimeout(function test(){
-			document.getElementById("ritu").innerHTML = "---------------------------";
+			
 			DB_REF.update({cont: "stop"});
-		},2000);
+		},DATA_TIMEOUT);
 	}
 	
 	function leftTurn(){
-		document.getElementById("letu").innerHTML = "Turning left";
-		DB_REF.update({cont: "left"});
+		
+		databasePush("left");
 		setTimeout(function test(){
-			document.getElementById("letu").innerHTML = "---------------------------";
+			
 			DB_REF.update({cont: "stop"});
-		},2000);
-	}
-	
-	//REMOVE THIS FOR CAMERA CONTROLS
-	function leftServo(){
-		document.getElementById("lese").innerHTML = "Servo Left";
-		DB_REF.update({servo: "left"});
-		setTimeout(function test(){
-			document.getElementById("lese").innerHTML = "---------------------------";
-			DB_REF.update({servo: "centre"});
-		},2000);
-	}
-	function rightServo(){
-		document.getElementById("rise").innerHTML = "Servo Right";
-		DB_REF.update({servo: "right"});
-		setTimeout(function test(){
-			document.getElementById("rise").innerHTML = "---------------------------";
-			DB_REF.update({servo: "centre"});
-		},2000);
+		},DATA_TIMEOUT);
 	}
 	
 	function readFirebase(){
-		console.log("reading firebase...");
+		console.log("Checking current movement...");
 		DB_REF.child("cont").on("value", function(snapshot){
-			console.log(snapshot.val());
 			var st = snapshot.val(); 
-			document.getElementById("status").innerHTML = "Current status : " + st;
 		});
 	}
 	
+	function resetDatabase(){
+		DB_REF.child("movement").set(["empty"]);
+	}
+
+	var bufferedMovements = [];
+	function readListCommands() {
+	    DB_REF.child("movement").on("value", function (snapshot) {
+	        //console.log(snapshot.val());
+	        var st = snapshot.val();
+			
+			bufferedMovements = st;
+	        
+	    });
+	}
+	
 	function getVideo(){
-		console.log("reading firebase...");
+		console.log("Getting video...");
 		DB_REF.child("vidSrc").on("value", function(snapshot){
-			console.log(snapshot.val());
 			var st = snapshot.val(); 
 			document.getElementById("vid").src = "https://www.youtube.com/embed/" + st;
 		});
 	}
 	
+	//Easier to type this than DB_Ref. blah blah
+	function databasePush(x){
+		//DB_REF.child("movement").push(x);
+	
+		
+		bufferedMovements.push(x);
+		console.log("Current buffer : " + bufferedMovements);
+		DB_REF.child("movement").set(bufferedMovements);
+	};
+	
 	function checkOnlineStatus(){
-		console.log("reading firebase...");
+		console.log("Checking online status...");
 		DB_REF.child("online").on("value", function(snapshot){
-			console.log(snapshot.val());
 			var st = snapshot.val(); 
 			document.getElementById("onlineStatus").innerHTML = "IS LILY CURRENTLY ACTIVE? : " + st;
 			if (st == "No"){
 				offline = true;
-				document.getElementById("status").innerHTML = "Current status : Offline";
 				document.getElementById("vid").src = "https://www.youtube.com/embed/rPleicjySdI";
 			}else{
 				readFirebase();
@@ -193,15 +178,11 @@
 			document.getElementById("bacBut").disabled = true;
 			document.getElementById("rigBut").disabled = true;
 			document.getElementById("lefBut").disabled = true;
-			document.getElementById("SLeBut").disabled = true;
-			document.getElementById("SRiBut").disabled = true;
 		} else {
 			document.getElementById("forBut").disabled = false;
 			document.getElementById("bacBut").disabled = false;
 			document.getElementById("rigBut").disabled = false;
 			document.getElementById("lefBut").disabled = false;
-			document.getElementById("SLeBut").disabled = false;
-			document.getElementById("SRiBut").disabled = false;
 		}
 	}
 	
