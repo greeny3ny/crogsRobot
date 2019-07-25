@@ -1,7 +1,9 @@
+//this doesn't actually serve purpose 
+
 console.log("botControl.js loaded");
 
 var config = {
-	apiKey: "AIzaSyA6pk5vRkVWlQRXKOjLJ_khMUMvGnTzlkQ",
+	apiKey: api_keys.FIREBASE_KEY,
 	authDomain: "crogobot.firebaseapp.com",
 	databaseURL: "https://crogobot.firebaseio.com",
 	projectId: "crogobot",
