@@ -16,7 +16,7 @@ input{
 	background-color:#97bcfc;
 	border:0;
 	margin:1px;
-	width:99vw;
+	width:48vw;
 	height: 13vh;
 	padding:10px;
 	display: inline-block;
@@ -25,4 +25,14 @@ input{
 	
 	font-weight: 700;
 	
+	-webkit-border-radius:0px;
+	-webkit-appearance: none;
+	
 }
+
+.form1{
+	
+	background-color:#15d3d6;
+	padding:0px;
+}
+
